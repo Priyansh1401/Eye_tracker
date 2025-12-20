@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+permissions:
+  security-events: write
+  contents: read
+
 jobs:
   test-backend:
     runs-on: ubuntu-latest
