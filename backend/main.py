@@ -1,11 +1,11 @@
 from typing import List, Optional
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
-from passlib.context import CryptContext
-from pydantic import BaseModel, EmailStr
+import bcrypt
+from pydantic import BaseModel, EmailStr, Field
 from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String, create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import Session, relationship, sessionmaker
@@ -54,7 +54,6 @@ SECRET_KEY = "change-me-in-prod"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
 
-pwd_context = CryptContext(schemes=["bcrypt", "sha256_crypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
 
 
@@ -70,7 +69,7 @@ class TokenData(BaseModel):
 class UserCreate(BaseModel):
     email: EmailStr
     full_name: Optional[str] = None
-    password: str
+    password: str = Field(..., min_length=8, max_length=72)  # bcrypt limit
     consent: bool = True
 
 
@@ -128,16 +127,20 @@ def get_db():
 # Auth helpers
 
 def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
+    # Truncate password to 72 bytes as required by bcrypt
+    plain_password_bytes = plain_password.encode('utf-8')[:72]
+    return bcrypt.checkpw(plain_password_bytes, hashed_password.encode('utf-8'))
 
 
 def get_password_hash(password):
-    return pwd_context.hash(password)
+    # Truncate password to 72 bytes as required by bcrypt
+    password_bytes = password.encode('utf-8')[:72]
+    return bcrypt.hashpw(password_bytes, bcrypt.gensalt()).decode('utf-8')
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
-    expire = datetime.now(timezone.utc) + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+    expire = datetime.now(UTC) + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
