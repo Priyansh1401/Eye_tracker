@@ -85,7 +85,7 @@ jobs:
         cd desktop
         pyinstaller --onefile --windowed --name WaW_EyeTracker main.py
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: WaW_EyeTracker_Windows
         path: desktop/dist/WaW_EyeTracker.exe
@@ -111,7 +111,7 @@ jobs:
         cd desktop
         pyinstaller --onefile --windowed --name WaW_EyeTracker main.py
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: WaW_EyeTracker_macOS
         path: desktop/dist/WaW_EyeTracker
