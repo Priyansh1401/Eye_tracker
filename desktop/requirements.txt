@@ -1,0 +1,6 @@
+pyqt5
+opencv-python
+numpy
+psutil
+requests
+pyinstaller
