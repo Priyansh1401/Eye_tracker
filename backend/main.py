@@ -13,7 +13,7 @@ from sqlalchemy.orm import Session, relationship, sessionmaker
 # Simple local SQLite DB; for cloud deploy, switch the DATABASE_URL to
 # a managed PostgreSQL/MySQL instance (RDS/Cloud SQL) with the same models.
 # TODO: With more time, migrate to PostgreSQL for production scalability
-DATABASE_URL = "sqlite:///./blinktracker.db"
+DATABASE_URL = "sqlite:///./blinktracker_new.db"
 
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
