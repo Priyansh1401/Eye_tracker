@@ -2,7 +2,7 @@
 
 ## 📋 **ASSIGNMENT OVERVIEW**
 
-This repository contains a **complete MVP implementation** of the "Founding App Developer" take-home assignment for Wellness at Work. The assignment required building a full-stack eye-tracking application within time-boxed constraints, demonstrating realistic startup development practices.
+This repository required building a full-stack eye-tracking application within time-boxed constraints, demonstrating realistic startup development practices.
 
 ### **Assignment Requirements**
 Build a wellness application that:
@@ -16,7 +16,7 @@ Build a wellness application that:
 - **Handles edge cases** like network failures and system performance
 
 ### **Time Constraints**
-- **3-4 days timeline** (simulated as a take-home assignment)
+- **3-4 days timeline**
 - **MVP scope only** - focus on core functionality over perfection
 - **Realistic trade-offs** - production-ready code, but MVP-appropriate architecture
 - **Demonstrate decision-making** - explain what was prioritized and why
@@ -425,7 +425,7 @@ This MVP reflects **realistic startup development** practices:
 
 ## 📄 **LICENSE & OWNERSHIP**
 
-This project was created as a take-home assignment for Wellness at Work. The implementation demonstrates full-stack development capabilities within realistic time and scope constraints.
+The implementation demonstrates full-stack development capabilities within realistic time and scope constraints.
 
 **Key Achievements:**
 - ✅ Complete working MVP with all core features
