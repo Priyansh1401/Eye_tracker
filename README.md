@@ -1,10 +1,9 @@
 # Cloud-Synced Eye Tracker MVP
 
-## 📋 **ASSIGNMENT OVERVIEW**
 
 This repository required building a full-stack eye-tracking application within time-boxed constraints, demonstrating realistic startup development practices.
 
-### **Assignment Requirements**
+### ** Requirements**
 Build a wellness application that:
 - **Tracks eye blinks** using computer vision to monitor screen time health
 - **Provides real-time feedback** on blink rates and eye strain
